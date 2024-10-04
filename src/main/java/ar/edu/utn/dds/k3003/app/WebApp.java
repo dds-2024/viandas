@@ -9,7 +9,6 @@ import ar.edu.utn.dds.k3003.controllers.CleanupController;
 import ar.edu.utn.dds.k3003.controllers.ViandaController;
 import ar.edu.utn.dds.k3003.facades.dtos.Constants;
 import ar.edu.utn.dds.k3003.model.CustomLocalDateTimeDeserializer;
-import ar.edu.utn.dds.k3003.EvaluadorAPI;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
