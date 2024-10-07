@@ -42,7 +42,8 @@ public class WebApp {
         app.get("/viandas/search/findByColaboradorIdAndAnioAndMes", viandasController::findByColaboradorIdAndAnioAndMes);
         app.get("/viandas/{qr}", viandasController::findByQR);
         app.get("/viandas/{qr}/vencida", viandasController::viandaVencida);
-        app.patch("/viandas/{qr}", viandasController::updateEstado);
+        app.patch("/viandas/{qr}", viandasController::updateHeladera);
+        app.patch("/viandas/{qr}/estado", viandasController::updateEstado);
         app.delete("/cleanup", cleanupController::cleanup);
     }
 

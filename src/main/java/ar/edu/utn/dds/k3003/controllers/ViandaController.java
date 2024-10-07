@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 import ar.edu.utn.dds.k3003.app.Fachada;
+import ar.edu.utn.dds.k3003.facades.dtos.EstadoViandaEnum;
 import ar.edu.utn.dds.k3003.facades.dtos.ViandaDTO;
 import io.javalin.http.Context;
 import io.javalin.http.HttpStatus;
@@ -61,7 +62,7 @@ public class ViandaController {
         }
     }
     
-    public void updateEstado(Context context) throws Exception {
+    public void updateHeladera(Context context) throws Exception {
         String QR = context.pathParamAsClass("qr", String.class).get();
         try {
             String body = context.body();
@@ -72,6 +73,24 @@ public class ViandaController {
         } catch (NoSuchElementException ex) {
             context.result(ex.getLocalizedMessage());
             context.status(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    public void updateEstado(Context context) throws Exception {
+        String QR = context.pathParamAsClass("qr", String.class).get();
+        try {
+            String body = context.body();
+            JSONObject jsonBody = new JSONObject(body);
+            String estadoString = jsonBody.getString("estado");
+            EstadoViandaEnum estado = EstadoViandaEnum.valueOf(estadoString.toUpperCase());
+            ViandaDTO viandaDTORta = this.fachada.modificarEstado(QR, estado);
+            context.json(viandaDTORta);
+        } catch (NoSuchElementException ex) {
+            context.result(ex.getLocalizedMessage());
+            context.status(HttpStatus.NOT_FOUND);
+        } catch (IllegalArgumentException ex) {
+            context.result("Estado de vianda inválido");
+            context.status(HttpStatus.BAD_REQUEST);
         }
     }
 }
